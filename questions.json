@@ -1,0 +1,5 @@
+{"qu": "¿Cuál de estas películas la dirigió Jean-Luc Godard?","an": [ "Los cuatrocientos golpes", "Vivir su vida", "Cuento de primavera", "Noche y niebla"], "ok": 1}
+{"qu": "¿En qué thriller setentero aparece un monólogo con la pregunta '¿hablas conmigo?'?","an": [ "La conversación", "Chacal", "Taxi Driver", "El cabo del miedo"], "ok": 2}
+{"qu": "¿Cuál de estas producciones de Haneke es más antigua?", "an": [ "La pianista", "Funny Games", "Código desconocido", "El séptimo continente"], "ok": 3}
+{"qu": "¿Cuál de estas películas la protagoniza Klaus Kinski?", "an": [ "Stroszek", "Fitzcarraldo", "Alicia en las ciudades", "El matrimonio de Maria Braun"], "ok": 1}
+{"qu": "¿En cuál de las siguientes películas aparece una cartera con la inscripción 'BAD MOTHERFUCKER'?", "an": [ "Pulp Fiction", "El gran Lebowski", "Jackie Brown", "Sospechosos habituales"], "ok": 0}

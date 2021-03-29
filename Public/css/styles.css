@@ -1,0 +1,245 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* ----- GENERALES ----- */
+
+* {
+    font-family: "Roboto Mono", monospace;
+    box-sizing: border-box;
+}
+
+/* -------------------------------------------------MAIN */
+
+.totalWrapper {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.totalWrapper .wrapper {
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* ----------------------------------------------- WELCOME */
+
+.totalWrapper .wrapper img {
+    width: 15vw;
+    margin-bottom: 10%;
+}
+
+.totalWrapper .wrapper .mainTitle {
+    line-height: 1.4;
+    font-size: 2rem;
+    margin-bottom: 8%;
+}
+
+.totalWrapper .wrapper p {
+    line-height: 1.5;
+    font-size: 1.2rem;
+}
+
+.totalWrapper .wrapper a {
+    margin: 8% auto;
+    background: #0f0f0f;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.totalWrapper .wrapper a:hover {
+      background: #3f3f3f;
+}
+
+/* ----------------------------------------------- QUIZ */
+/* --------------------------------------title */
+
+.totalWrapper .wrapper .wrapperTitle {
+    margin-bottom: 5%;
+}
+
+.totalWrapper .wrapper .wrapperTitle h2 {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+/* -------------------------------------answers */
+
+.totalWrapper .wrapper .wrapperAnsw {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	justify-content:space-between;
+}
+
+.totalWrapper .wrapper input {
+	display: none;
+}
+
+.totalWrapper .wrapper .wrapperAnsw label {
+	width: 90%;
+    min-height: 55px;
+    min-width: 250px;
+    margin: 2% 0%;
+    background-color: #cccccc;
+	color: rgb(0, 0, 0);
+	padding:15px 15px;
+	text-align: center;
+    cursor: pointer;
+}
+
+.totalWrapper .wrapper .wrapperAnsw .checked {
+	background-color: #1b1b1b;
+	color: #fff;
+}
+
+.totalWrapper .wrapper .wrapperAnsw .wrong {
+    background-color: rgb(226, 55, 55);
+    color: #fff;
+    animation: dissapear 0.8s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes dissapear {
+        0% {opacity: 1;}
+        100% {opacity: 0;}
+}
+
+.totalWrapper .wrapper .wrapperAnsw .right {
+    background-color: rgb(50, 150, 100);
+    color: #fff;
+}
+
+/* ------------MEDIA QUERIES----------- */
+
+@media screen and (min-width: 768px) {
+    .totalWrapper .wrapper {
+        width: 92%;
+    }
+
+    .totalWrapper .wrapper img {
+        width: 13vw;
+        margin-bottom: 8%;
+    }
+
+    .totalWrapper .wrapper .mainTitle {
+        font-size: 4rem;
+    }
+    
+    .totalWrapper .wrapper p {
+        font-size: 1.8rem;
+    }
+    
+    .totalWrapper .wrapper a {
+        padding: 10px 20px;
+    }
+
+    .totalWrapper .wrapper .wrapperTitle h2 {
+        font-size: 1.5rem;
+    }
+
+    .totalWrapper .wrapper .wrapperAnsw {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .totalWrapper .wrapper .wrapperAnsw label {
+        width: 48%;
+        min-height: 107px;
+        font-size: 1.2rem;
+        line-height: 2;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .totalWrapper .wrapper img {
+        width: 10vw;
+        margin-bottom: 5%;
+    }
+
+    .totalWrapper .wrapper .mainTitle {
+        margin-bottom: 5%;
+    }
+    .totalWrapper .wrapper p {
+        font-size: 1.6rem;
+    }
+
+    .totalWrapper .wrapper a {
+        margin: 5% auto;
+    }
+
+    .totalWrapper .wrapper .wrapperAnsw label {
+        min-width: 420px;
+    }
+}
+
+@media screen and (min-width: 1368px) {
+    .totalWrapper .wrapper {
+        width: 80%;
+    }
+
+    .totalWrapper .wrapper img {
+        width: 8vw;
+    }
+
+    .totalWrapper .wrapper a {
+        padding: 20px 30px;
+    }
+
+    .totalWrapper .wrapper .wrapperTitle h2 {
+        font-size: 2rem;
+    }
+}
