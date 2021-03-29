@@ -93,7 +93,7 @@ form>div.checkbox {
 }
 
 h2.title {
-    font-size: 2.4rem;
+    font-size: 2.1rem;
     font-weight: bold;
     text-align: center;
 }
@@ -136,7 +136,7 @@ form div button:hover {
 
 .btnBig {
     padding: 5%;
-    background-color: #626262;
+    background-color: darkslategray;
     color: antiquewhite;
 }
 
@@ -178,6 +178,26 @@ div.dataBox p {
 .adminWrapper header h2 {
     margin: 0 0 2% 0;
 }
+.adminWrapper>header>div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.adminWrapper>header>div>button { 
+    margin: 1%;
+    width: 49%;
+    padding: 4%;
+    border: none;
+    border-radius: 10px;
+    background-color: darkslategray;
+    color: white;
+}
+
+.adminWrapper>header>div>button:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
 
 .wrapperResult {
     width: 100%;
@@ -195,6 +215,22 @@ div.dataBox p {
     text-align: center;
 }
 
+.wrapperResult button {
+    margin: 1%;
+    width: 23%;
+    height: min-content;
+    padding: 2%;
+    border: none;
+    border-radius: 10px;
+    background-color: darkslategray;
+    color: white;
+}
+
+.wrapperResult button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
 .wrapperResult input {
     margin: 2%;
     width: 100%;
@@ -210,6 +246,8 @@ div.dataBox p {
 }
 
 .wrapperResult>div{
-    display:flex;
     margin: 2%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }

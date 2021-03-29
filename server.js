@@ -263,3 +263,35 @@ server.delete('/delete', (req, res) => {
             })
     }
 })
+
+// -------------------------------------------------EDIT
+
+server.put('/edit', (req, res) => {
+    MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+        try {
+            db.db("quiz")
+                .collection("questions")
+                .updateOne({qu: req.body.qu}, { $set: {an: req.body.an, ok: req.body.ok}}, (err, result) => {
+                    if (err){
+                        res.status(400).json({
+                            status: 400,
+                            data: "Database error",
+                        })
+                        db.close()
+                    } else {
+                        res.status(200).json({
+                            status: 200,
+                            data: "Question edited correctly",
+                            url: "/admin"
+                        })
+                        db.close()
+                    }
+                })
+        } catch {
+            res.status(500).json({
+                status: 500,
+                data: "There's a problem with the internal server. Try again later"
+            })
+        }
+    })
+})
