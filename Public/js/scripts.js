@@ -123,17 +123,21 @@ function count(counter, length) {
     WRAPPERANS.appendChild(restart);
     restart.addEventListener("click", restartGame)
 
-    if (mean > 6) {
+    if (mean > 8) {
         let farewell = document.createElement("h2");
         let farewellText = document.createTextNode(`Tu puntuación ha sido de ${Math.round((mean + Number.EPSILON) * 100) / 100} sobre 10. Nivel: final-boss de Filmin. Eres un máquina`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
-    } else if (mean < 2) {
+    } else if (mean < 3) {
         let farewell = document.createElement("h2");
         let farewellText = document.createTextNode(`Tu puntuación ha sido de ${Math.round((mean + Number.EPSILON) * 100) / 100} sobre 10. Nivel: sácate el abono de la filmoteca`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
-
+    } else if (mean > 3 && mean < 5) {
+        let farewell = document.createElement("h2");
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${Math.round((mean + Number.EPSILON) * 100) / 100} sobre 10. Nivel: hay que ver más cine`);
+        farewell.appendChild(farewellText);
+        WRAPPERTIT.appendChild(farewell);
     } else {
         let farewell = document.createElement("h2");
         let farewellText = document.createTextNode(`Tu puntuación ha sido de ${Math.round((mean + Number.EPSILON) * 100) / 100} sobre 10. Nivel: gafapasta amateur`);
