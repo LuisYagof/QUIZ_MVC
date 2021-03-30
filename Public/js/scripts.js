@@ -8,6 +8,7 @@ async function getQuest() {
     .then(res => res.json())
     .then(data => {
         if (data.status == 200){
+            console.log(data.data);
             printQuestion(data.data[position], data.data)
         }
 

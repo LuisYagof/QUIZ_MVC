@@ -179,7 +179,7 @@ function printDetailNewQ(){
         if (question.value == "" || answ1.value == "" || answ2.value == "" || answ3.value == "" || answ4.value == "" ){
             alert("La pregunta debe tener contenidos")
         } else {
-            addQuestionToDB(question.value, answ1.value, answ2.value, answ3.value, answ4.value, selector.value)
+            addQuestionToDB(question.value, answ1.value, answ2.value, answ3.value, answ4.value, Number(selector.value))
         }
     })
 
@@ -316,6 +316,7 @@ function printDetailEdit(element){
     let btnBox = document.createElement("div")
     document.querySelector(".wrapperResult").appendChild(btnBox)
 
+    
     let send = document.createElement("button")
     let sendCont = document.createTextNode("Editar")
     send.appendChild(sendCont)
@@ -324,7 +325,7 @@ function printDetailEdit(element){
         if (answ1.value == "" || answ2.value == "" || answ3.value == "" || answ4.value == "" ){
             alert("La pregunta debe tener contenidos")
         } else {
-        editQuestionDB(element.qu, answ1.value, answ2.value, answ3.value, answ4.value, selector.value)
+            editQuestionDB(element.qu, answ1.value, answ2.value, answ3.value, answ4.value, Number(selector.value))
         }
     })
 
