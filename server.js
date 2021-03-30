@@ -31,16 +31,19 @@ let fileOptions = {
 };
 
 server.get('/login', (req,res,next) => {
-    let fileName = 'login.html';
-    res.sendFile(fileName, fileOptions);
+    res.sendFile('login.html', fileOptions);
 });
 
-server.get('/signup', (req,res) => {
+server.get('/', (req,res) => {
     res.sendFile('index.html', fileOptions);
 });
 
 server.get('/admin', (req,res) => {
     res.sendFile('admin.html', fileOptions);
+});
+
+server.get('/test', (req,res) => {
+    res.sendFile('main.html', fileOptions);
 });
 
 // ---------------------------------------------VALIDATION
@@ -66,14 +69,14 @@ server.post('/login', (req, res) => {
                         if (result == null){
                             res.status(401).json({
                                 status: 401,
-                                data: "Password and email do not match"
+                                data: "Contraseña y email no coinciden"
                             })
                             db.close()
                         } else {
                             let token = jwt.sign({email: USER.email}, result.secret, {expiresIn: 600})
                             res.status(200).json({
                                 status: 200,
-                                data: "Token sent",
+                                data: "Token enviado",
                                 url: "/admin",
                                 token: token
                             })
@@ -83,14 +86,14 @@ server.post('/login', (req, res) => {
             } catch {
                 res.status(500).json({
                     status: 500,
-                    data: "There's a problem with the internal server. Try again later"
+                    data: "Hay un problema en nuestro servidor. Inténtalo más tarde"
                 })
             }
         })
     } else {
         res.status(406).json({
             status: 406,
-            data: "Email invalid / Pass must contain minimum eight characters, at least one letter and one number"
+            data: "Email inválido // La contraseña debe contener mínimo 8 caracteres, incluyendo una letra y un número"
         })
     }
 })
@@ -124,7 +127,7 @@ server.get('/questions', (req, res) => {
                                 }
                             } catch {
                                 res.status(401).json({
-                                    data: "You're not authorized to see this content. Please try logging in again",
+                                    data: "No estás autorizado. Redireccionando a login",
                                     ok: false,
                                     status: 401,
                                     url: '/login'
@@ -133,7 +136,7 @@ server.get('/questions', (req, res) => {
                         })
                 } catch {
                     res.status(500).json({
-                        data: "There's a problem with the internal server. Try again later",
+                        data: "Hay un problema en nuestro servidor. Inténtalo más tarde",
                         ok: false,
                         status: 500
                     })
@@ -142,7 +145,7 @@ server.get('/questions', (req, res) => {
         }                 
     } catch {
         res.status(401).json({
-            data: "You're not authorized to see this content. Please try logging in again",
+            data: "No estás autorizado. Redireccionando a login",
             ok: false,
             status: 401,
             url: '/login'
@@ -168,14 +171,14 @@ server.put('/logout', (req, res) => {
                             if (err){
                                 res.status(400).json({
                                     status: 400,
-                                    data: "Fatal error-- Humans must be destroyed",
+                                    data: "Imposible salir",
                                     ok: false
                                 })
                                 db.close()
                             } else {
                                 res.status(200).json({
                                     status: 200,
-                                    data: "Succesfully logged out",
+                                    data: "Saliendo del área administrador",
                                     ok: true,
                                     url: '/login'
                                 })
@@ -185,7 +188,7 @@ server.put('/logout', (req, res) => {
                 } catch {
                     res.status(500).json({
                         status: 500,
-                        data: "There's a problem with the internal server. Try again later",
+                        data: "Hay un problema en nuestro servidor. Inténtalo más tarde",
                         ok: false,
                     })
                 }
@@ -194,7 +197,7 @@ server.put('/logout', (req, res) => {
     } catch {
         res.status(401).json({
             status: 401,
-            data: "You're already logged out",
+            data: "Imposible salir. Ya estás fuera",
             ok: false,
         })
     }
@@ -217,13 +220,13 @@ server.post('/add', (req, res) => {
                     if (err){
                         res.status(400).json({
                             status: 400,
-                            data: "Database error",
+                            data: "Error en la base de datos",
                         })
                         db.close()
                     } else {
                         res.status(200).json({
                             status: 200,
-                            data: "Question added correctly",
+                            data: "Pregunta añadida correctamente",
                             url: "/admin"
                         })
                         db.close()
@@ -232,7 +235,7 @@ server.post('/add', (req, res) => {
         } catch {
             res.status(500).json({
                 status: 500,
-                data: "There's a problem with the internal server. Try again later"
+                data: "Hay un problema en nuestro servidor. Inténtalo más tarde"
             })
         }
     })
@@ -248,7 +251,7 @@ server.delete('/delete', (req, res) => {
                     .deleteOne({qu: req.body.qu}, (err, result) => {
                         res.status(200).json({
                             status:200,
-                            data: "Question was deleted correctly",
+                            data: "Pregunta borrada correctamente",
                             ok: true,
                             url: '/admin'
                         })
@@ -258,7 +261,7 @@ server.delete('/delete', (req, res) => {
     } catch {
         res.status(500).json({
             status: 500,
-            data: "There's a problem with the internal server. Try again later",
+            data: "Hay un problema en nuestro servidor. Inténtalo más tarde",
             ok: false,
             })
     }
@@ -275,13 +278,13 @@ server.put('/edit', (req, res) => {
                     if (err){
                         res.status(400).json({
                             status: 400,
-                            data: "Database error",
+                            data: "Error en la base de datos",
                         })
                         db.close()
                     } else {
                         res.status(200).json({
                             status: 200,
-                            data: "Question edited correctly",
+                            data: "Pregunta editada correctamente",
                             url: "/admin"
                         })
                         db.close()
@@ -290,8 +293,33 @@ server.put('/edit', (req, res) => {
         } catch {
             res.status(500).json({
                 status: 500,
-                data: "There's a problem with the internal server. Try again later"
+                data: "Hay un problema en nuestro servidor. Inténtalo más tarde"
             })
         }
     })
 })
+
+// -------------------------------------------------GET QUESTIONS
+
+server.get('/getQuestions', (req, res) => {
+    try {
+        MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+                db.db("quiz")
+                .collection("questions")
+                .find({}).toArray( (err, result) => {
+                        res.status(200).json({
+                            data: result,
+                            status: 200
+                        })
+                        db.close()
+                })
+        })
+    } catch {
+        res.status(500).json({
+            data: "Hay un problema en nuestro servidor. Inténtalo más tarde",
+            ok: false,
+            status: 500
+        })
+    }
+})
+

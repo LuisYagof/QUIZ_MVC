@@ -3,16 +3,34 @@ const WRAPPERANS = document.querySelector(".wrapperAnsw");
 let counter = 5;
 let position = 0;
 
+async function getQuest() {
+    fetch("/getQuestions")
+    .then(res => res.json())
+    .then(data => {
+        if (data.status == 200){
+            printQuestion(data.data[position], data.data)
+        }
+
+        if (data.status == 500){
+            alert(data.data)
+        }
+    })
+    .catch(err => console.log("Internal server error. Sorry :(", err))
+}
+
+getQuest();
+
 // ------------------------------------------------------SHUFFLE----------------------------------------
 
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
-  }
-shuffle(DATABASE);
+}
+
+// shuffle(allQuestions);
 
 // ------------------------------------------------------GENERATE---------------------------------------
 
-function printQuestion(question){
+function printQuestion(question, database){
     let questionElements = [];
     let title = document.createElement("h2");
     let content = document.createTextNode(question.qu);
@@ -45,7 +63,7 @@ function printQuestion(question){
 
         label.addEventListener("click",() => {
             if (!label.classList.contains("clicked")) {
-                evaluateAnswer(question.ok, questionElements, label, arrayAns[i].pos)
+                evaluateAnswer(question.ok, questionElements, label, arrayAns[i].pos, database)
             }
             });
 
@@ -54,11 +72,11 @@ function printQuestion(question){
     }
 }
 
-printQuestion(DATABASE[position]);
+// printQuestion(allQuestions[position]);
 
 // ----------------------------------------------------------EVALUATE-------------------------------------
 
-function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos) {
+function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos, database) {
     answerLabel.classList.add("checked");
     answerLabel.classList.add("clicked");
     
@@ -69,7 +87,7 @@ function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos) {
             position++;
             counter++;
 
-            next(nodes);
+            next(nodes, database);
             
         }else{
             answerLabel.classList.remove("checked");
@@ -77,17 +95,17 @@ function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos) {
             position++;
             counter= counter-1;
 
-            next(nodes);
+            next(nodes, database);
         }
     }, 500);
 }
 
 // ------------------------------------------------------NEXT QUESTION-----------------------------
 
-function next(nodes) {
+function next(nodes, database) {
     setTimeout(() => remover(nodes), 1000);
-    if (position < DATABASE.length) {
-        setTimeout(() => printQuestion(DATABASE[position]), 1000);
+    if (position < database.length) {
+        setTimeout(() => printQuestion(database[position], database), 1000);
     }else{
         setTimeout(() => count(counter), 1000);}
 }
@@ -101,11 +119,11 @@ function remover(nodes){
 // ------------------------------------------------------SCORE-------------------------------------
 
 function count(counter) {
-    let restart = document.createElement("a");
-    restart.setAttribute("href", "main.html");
-    let restartText = document.createTextNode(`REINICIAR`);
+    let restart = document.createElement("button");
+    let restartText = document.createTextNode(`REINICIAR`)
     restart.appendChild(restartText);
     WRAPPERANS.appendChild(restart);
+    restart.addEventListener("click", restartGame)
 
     if (counter > 6) {
         let farewell = document.createElement("h2");
@@ -124,4 +142,10 @@ function count(counter) {
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
     }    
+}
+
+function restartGame(){
+    fetch("/")
+    .then(res => window.location.href = res.url)
+    .catch(err => console.log("Internal server error. Sorry :(", err))
 }

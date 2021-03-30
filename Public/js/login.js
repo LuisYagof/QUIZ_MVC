@@ -17,7 +17,7 @@ function login() {
     .then(res => res.json())
     .then(data => {
         if (data.status == 200){
-            alert(data.data)
+            alert("Datos correctos. Entrando en área administrador")
             sessionStorage.setItem("token", data.token)
             setTimeout(window.location.href = data.url, 1500)
         }
@@ -31,5 +31,16 @@ function login() {
             alert(data.data)
         }
     })
+    .catch(err => console.log("Internal server error. Sorry :(", err))
+}
+
+// ---------------------------------------------VOLVER
+
+document.querySelector("#back")
+    .addEventListener("click", () => goBack())
+    
+function goBack() {
+    fetch("/")
+    .then(res => window.location.href = res.url)
     .catch(err => console.log("Internal server error. Sorry :(", err))
 }

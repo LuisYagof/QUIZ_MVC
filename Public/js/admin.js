@@ -45,7 +45,9 @@ function printData(element) {
     erase.appendChild(eraseCon)
     questBox.appendChild(erase)
     erase.addEventListener("click", () => {
-        deleteQuestion(element.qu)
+        if (confirm("¿Seguro que quieres borrar esta pregunta?")) {
+            deleteQuestion(element.qu)
+        }
     })
 }
 
@@ -106,6 +108,7 @@ function printDetailNewQ(){
 
     let question = document.createElement("input")
     question.setAttribute("placeholder", "Título de la pregunta")
+    question.setAttribute("required", "")
     document.querySelector(".wrapperResult")
         .appendChild(question)
 
@@ -173,7 +176,11 @@ function printDetailNewQ(){
     send.appendChild(sendCont)
     btnBox.appendChild(send)
     send.addEventListener("click", () => {
-        addQuestionToDB(question.value, answ1.value, answ2.value, answ3.value, answ4.value, selector.value)
+        if (question.value == "" || answ1.value == "" || answ2.value == "" || answ3.value == "" || answ4.value == "" ){
+            alert("La pregunta debe tener contenidos")
+        } else {
+            addQuestionToDB(question.value, answ1.value, answ2.value, answ3.value, answ4.value, selector.value)
+        }
     })
 
     let back = document.createElement("button")
@@ -314,7 +321,11 @@ function printDetailEdit(element){
     send.appendChild(sendCont)
     btnBox.appendChild(send)
     send.addEventListener("click", () => {
+        if (answ1.value == "" || answ2.value == "" || answ3.value == "" || answ4.value == "" ){
+            alert("La pregunta debe tener contenidos")
+        } else {
         editQuestionDB(element.qu, answ1.value, answ2.value, answ3.value, answ4.value, selector.value)
+        }
     })
 
     let back = document.createElement("button")
