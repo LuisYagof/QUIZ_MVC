@@ -8,9 +8,9 @@ async function getQuest() {
     .then(res => res.json())
     .then(data => {
         if (data.status == 200){
+            shuffle(data.data)
             printQuestion(data.data[position], data.data)
         }
-
         if (data.status == 500){
             alert(data.data)
         }
@@ -25,8 +25,6 @@ getQuest();
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
 }
-
-// shuffle(allQuestions);
 
 // ------------------------------------------------------GENERATE---------------------------------------
 
@@ -71,8 +69,6 @@ function printQuestion(question, database){
         questionElements.push(label);
     }
 }
-
-// printQuestion(allQuestions[position]);
 
 // ----------------------------------------------------------EVALUATE-------------------------------------
 
