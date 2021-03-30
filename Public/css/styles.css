@@ -66,6 +66,7 @@ table {
 
 .totalWrapper .wrapper {
     width: 98%;
+    max-width: 960px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,6 +107,10 @@ table {
     background: #3f3f3f;
     cursor: pointer;
     transform: scale(1.05);
+}
+
+.totalWrapper .wrapper button.restartBtn {
+    padding: 10%;
 }
 
 /* ----------------------------------------------- QUIZ */
@@ -175,20 +180,22 @@ table {
     }
 
     .totalWrapper .wrapper img {
-        width: 13vw;
-        margin-bottom: 8%;
+        width: 8vw;
+        margin-bottom: 1%;
     }
 
     .totalWrapper .wrapper .mainTitle {
-        font-size: 4rem;
+        font-size: 3rem;
+        margin-bottom: 0;
     }
     
     .totalWrapper .wrapper p {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
     
-    .totalWrapper .wrapper a {
-        padding: 10px 20px;
+    .totalWrapper .wrapper button {
+        padding: 1%;
+        width: 25%;
     }
 
     .totalWrapper .wrapper .wrapperTitle h2 {

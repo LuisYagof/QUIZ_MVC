@@ -1,6 +1,6 @@
 const WRAPPERTIT = document.querySelector(".wrapperTitle");
 const WRAPPERANS = document.querySelector(".wrapperAnsw");
-let counter = 5;
+let counter = 0;
 let position = 0;
 
 async function getQuest() {
@@ -8,7 +8,6 @@ async function getQuest() {
     .then(res => res.json())
     .then(data => {
         if (data.status == 200){
-            console.log(data.data);
             printQuestion(data.data[position], data.data)
         }
 
@@ -94,7 +93,6 @@ function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos, database) {
             answerLabel.classList.remove("checked");
             answerLabel.classList.add("wrong");
             position++;
-            counter= counter-1;
 
             next(nodes, database);
         }
@@ -108,7 +106,7 @@ function next(nodes, database) {
     if (position < database.length) {
         setTimeout(() => printQuestion(database[position], database), 1000);
     }else{
-        setTimeout(() => count(counter), 1000);}
+        setTimeout(() => count(counter, database.length), 1000);}
 }
 
 function remover(nodes){
@@ -119,27 +117,30 @@ function remover(nodes){
 
 // ------------------------------------------------------SCORE-------------------------------------
 
-function count(counter) {
+function count(counter, length) {
+    let mean = counter / length * 10
+
     let restart = document.createElement("button");
     let restartText = document.createTextNode(`REINICIAR`)
     restart.appendChild(restartText);
+    restart.setAttribute("class", "restartBtn")
     WRAPPERANS.appendChild(restart);
     restart.addEventListener("click", restartGame)
 
-    if (counter > 6) {
+    if (mean > 6) {
         let farewell = document.createElement("h2");
-        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 10. Nivel: final-boss de Filmin. Eres un máquina`);
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${Math.round((mean + Number.EPSILON) * 100) / 100} sobre 10. Nivel: final-boss de Filmin. Eres un máquina`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
-    } else if (counter < 2) {
+    } else if (mean < 2) {
         let farewell = document.createElement("h2");
-        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 10. Nivel: sácate el abono de la filmoteca`);
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${Math.round((mean + Number.EPSILON) * 100) / 100} sobre 10. Nivel: sácate el abono de la filmoteca`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
 
     } else {
         let farewell = document.createElement("h2");
-        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 10. Nivel: gafapasta amateur`);
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${Math.round((mean + Number.EPSILON) * 100) / 100} sobre 10. Nivel: gafapasta amateur`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
     }    

@@ -68,7 +68,8 @@ main {
 
 form {
     width: 93%;
-    height: 65vh;
+    max-width: 500px;
+    min-height: 65vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -178,6 +179,7 @@ div.dataBox p {
 .adminWrapper header h2 {
     margin: 0 0 2% 0;
 }
+
 .adminWrapper>header>div {
     width: 100%;
     display: flex;
@@ -188,6 +190,7 @@ div.dataBox p {
 .adminWrapper>header>div>button { 
     margin: 1%;
     width: 40%;
+    max-width: 160px;
     padding: 2%;
     border: none;
     border-radius: 10px;
@@ -202,6 +205,7 @@ div.dataBox p {
 
 .wrapperResult {
     width: 100%;
+    max-width: 968px;
     padding: 3%;
     display: flex;
     flex-direction: column;
@@ -209,6 +213,7 @@ div.dataBox p {
 
 .wrapperResult h3 {
     margin: 2% 0 2% 0;
+    width: 100%;
 }
 
 .wrapperResult h4 {
@@ -225,6 +230,7 @@ div.dataBox p {
 .wrapperResult button {
     margin: 1%;
     width: 23%;
+    max-width: 100px;
     height: min-content;
     padding: 2%;
     border: none;
@@ -261,4 +267,30 @@ div.dataBox p {
     display:flex;
     align-items: center;
     justify-content: center;
+}
+
+/* ------------------------------------------------------------MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+    .adminWrapper header {
+        padding: 1%;
+    }
+    
+    .adminWrapper header h2 {
+        margin: 1% 0 1% 0;
+    }
+    
+    .adminWrapper>header>div>button { 
+        padding: 1%;
+    }
+
+    .wrapperResult button { 
+        padding: 1%;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .wrapperResult h4 {
+        margin: 0 0 2% 0;
+    }
 }
