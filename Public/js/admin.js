@@ -240,7 +240,6 @@ function deleteQuestion(questionTitle) {
     .catch(err => console.log("Internal server error. Sorry :(", err))
 }
 
-
 //  ----------------------------------------------------------EDIT QUEST
 
 function printDetailEdit(element){

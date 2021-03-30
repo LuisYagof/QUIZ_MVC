@@ -60,8 +60,8 @@ function printQuestion(question, database){
         label.appendChild(labelCont);
 
         label.addEventListener("click",() => {
-            if (!label.classList.contains("clicked")) {
-                evaluateAnswer(question.ok, questionElements, label, arrayAns[i].pos, database)
+            if (!title.classList.contains("clicked")) {
+                evaluateAnswer(question.ok, questionElements, label, arrayAns[i].pos, database, title)
             }
             });
 
@@ -72,9 +72,9 @@ function printQuestion(question, database){
 
 // ----------------------------------------------------------EVALUATE-------------------------------------
 
-function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos, database) {
+function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos, database, title) {
     answerLabel.classList.add("checked");
-    answerLabel.classList.add("clicked");
+    title.classList.add("clicked");
     
     setTimeout( function() {
         if (correctPos === selectedPos) {

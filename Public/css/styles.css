@@ -211,7 +211,7 @@ table {
         width: 48%;
         min-height: 107px;
         font-size: 1.2rem;
-        line-height: 2;
+        padding: 5%;
     }
 }
 

@@ -48,6 +48,10 @@ table {
 }
 
 /* ---------------------------------------------GENERAL */
+@font-face {
+    font-family: "DK";
+    src: url("../fonts/DkCrayonCrumble-ddll.ttf") format("truetype");
+}
 
 * {
     box-sizing: border-box;
@@ -168,7 +172,7 @@ div.dataBox p {
 }
 
 .adminWrapper header {
-    background-color: whitesmoke;
+    background-color: darkslategray;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -178,6 +182,9 @@ div.dataBox p {
 
 .adminWrapper header h2 {
     margin: 0 0 2% 0;
+    font-family: "DK";
+    color: ivory;
+    font-size: 3rem;
 }
 
 .adminWrapper>header>div {
@@ -189,13 +196,13 @@ div.dataBox p {
 
 .adminWrapper>header>div>button { 
     margin: 1%;
-    width: 40%;
+    width: 44%;
     max-width: 160px;
     padding: 2%;
     border: none;
     border-radius: 10px;
-    background-color: darkslategray;
-    color: white;
+    background-color: ivory;
+    color: black;
 }
 
 .adminWrapper>header>div>button:hover{
@@ -206,7 +213,6 @@ div.dataBox p {
 .wrapperResult {
     width: 100%;
     max-width: 968px;
-    padding: 3%;
     display: flex;
     flex-direction: column;
 }
@@ -214,6 +220,7 @@ div.dataBox p {
 .wrapperResult h3 {
     margin: 2% 0 2% 0;
     width: 100%;
+    font-size: 0.8rem;
 }
 
 .wrapperResult h4 {
@@ -237,6 +244,7 @@ div.dataBox p {
     border-radius: 10px;
     background-color: darkslategray;
     color: white;
+    font-size: 0.8rem;
 }
 
 .wrapperResult button:hover {
@@ -245,8 +253,8 @@ div.dataBox p {
 }
 
 .wrapperResult input {
-    margin: 2%;
-    width: 100%;
+    margin: 2% auto;
+    width: 95%;
     line-height: 1.5;
     border-radius: 10px;
     border: none;
@@ -271,6 +279,17 @@ div.dataBox p {
 
 /* ------------------------------------------------------------MEDIA QUERIES */
 
+@media screen and (min-width: 480px) {
+    .wrapperResult h3 {
+        font-size: 1rem;
+    }
+
+    .wrapperResult button {
+        font-size: 1rem;
+    }
+
+}
+
 @media screen and (min-width: 768px) {
     .adminWrapper header {
         padding: 1%;
@@ -278,10 +297,15 @@ div.dataBox p {
     
     .adminWrapper header h2 {
         margin: 1% 0 1% 0;
+        font-size: 4rem;
     }
     
     .adminWrapper>header>div>button { 
         padding: 1%;
+    }
+
+    .wrapperResult {
+        padding: 2%;
     }
 
     .wrapperResult button { 

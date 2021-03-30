@@ -49,9 +49,7 @@ server.get('/test', (req,res) => {
 // ---------------------------------------------VALIDATION
 
 const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  
 const passIsValid = (pass) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(pass)
-
 
 // ----------------------------------------------LOGIN
 
@@ -153,9 +151,7 @@ server.get('/questions', (req, res) => {
     }
 })
 
-
 // ---------------------------------------------------LOGOUT
-
 
 server.put('/logout', (req, res) => {
     try {
@@ -211,7 +207,6 @@ server.post('/add', (req, res) => {
         an: req.body.an,
         ok: req.body.ok
     }
-
     MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
         try {
             db.db("quiz")
