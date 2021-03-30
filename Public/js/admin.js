@@ -101,7 +101,7 @@ function printDetailNewQ(){
     removeWrapper();
 
     let title = document.createElement("h4")
-    let titleCon = document.createTextNode("Crea nueva pregunta")
+    let titleCon = document.createTextNode("Añade una pregunta nueva")
     title.appendChild(titleCon)
     document.querySelector(".wrapperResult")
         .appendChild(title)
