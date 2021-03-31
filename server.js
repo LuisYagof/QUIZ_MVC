@@ -71,7 +71,7 @@ server.post('/login', (req, res) => {
                             })
                             db.close()
                         } else {
-                            let token = jwt.sign({email: USER.email}, result.secret, {expiresIn: 600})
+                            let token = jwt.sign({email: USER.email}, result.secret, {expiresIn: 3600})
                             res.status(200).json({
                                 status: 200,
                                 data: "Token enviado",
