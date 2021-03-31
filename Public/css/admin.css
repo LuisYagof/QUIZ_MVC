@@ -61,6 +61,11 @@ table {
     font: "Roboto Mono";
 }
 
+::selection {
+    background-color: darkslategray;
+    color: whitesmoke;
+}
+
 main {
     width: 100vw;
     height: 100vh;
@@ -98,9 +103,11 @@ form>div.checkbox {
 }
 
 h2.title {
-    font-size: 2.1rem;
+    font-size: 4.1rem;
     font-weight: bold;
     text-align: center;
+    font-family: "DK";
+    color: darkslategray;
 }
 
 form div input {
@@ -149,6 +156,8 @@ form div button:hover {
     background-color: transparent;
     border: none;
     width: 100%;
+    font-size: 0.9rem;
+    margin-top: -4%;
 }
 
 div.dataBox {
@@ -250,7 +259,8 @@ div.dataBox p {
 
 .wrapperResult h5 {
     text-align: center;
-    margin: 0 0 4% 0;
+    margin: 2% 0 2% 0;
+    font-size: 0.8rem;
 }
 
 .wrapperResult button {

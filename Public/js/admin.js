@@ -51,7 +51,7 @@ function printData(element) {
     btnBox.appendChild(erase)
     erase.addEventListener("click", () => {
         if (confirm("¿Seguro que quieres borrar esta pregunta?")) {
-            deleteQuestion(element.qu)
+            deleteQuestion(element._id)
         }
     })
 }
@@ -224,10 +224,10 @@ function addQuestionToDB(qu, an1, an2, an3, an4, corr) {
 
 //  ----------------------------------------------------------DELETE QUEST
 
-function deleteQuestion(questionTitle) {
+function deleteQuestion(questionId) {
     fetch("/delete", {
         method: 'DELETE',
-        body: JSON.stringify( { qu: questionTitle } ),
+        body: JSON.stringify( { _id: questionId } ),
         headers: {
             'Content-Type': "application/json"
         }
@@ -256,10 +256,18 @@ function printDetailEdit(element){
     document.querySelector(".wrapperResult")
         .appendChild(title)
 
-    let question = document.createElement("h5")
-    question.innerText = element.qu
+    let subtitle = document.createElement("h5")
+    subtitle.innerText = "Título de la pregunta"
+    document.querySelector(".wrapperResult").appendChild(subtitle)
+    
+    let question = document.createElement("input")
+    question.setAttribute("value", element.qu)
     document.querySelector(".wrapperResult")
-        .appendChild(question)
+    .appendChild(question)
+    
+    let answTitle = document.createElement("h5")
+    answTitle.innerText = "Respuestas"
+    document.querySelector(".wrapperResult").appendChild(answTitle)
 
     let answ1 = document.createElement("input")
     answ1.setAttribute("value", element.an[0])
@@ -320,7 +328,6 @@ function printDetailEdit(element){
     let btnBox = document.createElement("div")
     document.querySelector(".wrapperResult").appendChild(btnBox)
 
-    
     let send = document.createElement("button")
     let sendCont = document.createTextNode("Editar")
     send.appendChild(sendCont)
@@ -329,7 +336,7 @@ function printDetailEdit(element){
         if (answ1.value == "" || answ2.value == "" || answ3.value == "" || answ4.value == "" ){
             alert("La pregunta debe tener contenidos")
         } else {
-            editQuestionDB(element.qu, answ1.value, answ2.value, answ3.value, answ4.value, Number(selector.value))
+            editQuestionDB(question.value, answ1.value, answ2.value, answ3.value, answ4.value, Number(selector.value), element._id)
         }
     })
 
@@ -343,10 +350,10 @@ function printDetailEdit(element){
     })
 }
 
-function editQuestionDB(qu, an1, an2, an3, an4, corr) {
+function editQuestionDB(qu, an1, an2, an3, an4, corr, id) {
     fetch("/edit", {
         method: 'PUT',
-        body: JSON.stringify( {qu: qu, an: [an1, an2, an3, an4], ok: corr} ),
+        body: JSON.stringify( {_id: id, qu: qu, an: [an1, an2, an3, an4], ok: corr} ),
         headers: {
             'Content-Type': 'application/json',
         }

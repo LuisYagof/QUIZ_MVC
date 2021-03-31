@@ -1,6 +1,7 @@
 const express = require('express');
 const ENV = require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient
+const ObjectID = require('mongodb').ObjectID;
 const MONGOdb = process.env.MONGO
 const optionsMongo = { useNewUrlParser: true, useUnifiedTopology: true }
 const cors = require('cors')
@@ -243,7 +244,7 @@ server.delete('/delete', (req, res) => {
         MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
                 db.db("quiz")
                     .collection("questions")
-                    .deleteOne({qu: req.body.qu}, (err, result) => {
+                    .deleteOne({_id: ObjectID(req.body._id)}, (err, result) => {
                         res.status(200).json({
                             status:200,
                             data: "Pregunta borrada correctamente",
@@ -269,7 +270,7 @@ server.put('/edit', (req, res) => {
         try {
             db.db("quiz")
                 .collection("questions")
-                .updateOne({qu: req.body.qu}, { $set: {an: req.body.an, ok: req.body.ok}}, (err, result) => {
+                .updateOne({_id: ObjectID(req.body._id)}, { $set: {qu: req.body.qu, an: req.body.an, ok: req.body.ok}}, (err, result) => {
                     if (err){
                         res.status(400).json({
                             status: 400,
