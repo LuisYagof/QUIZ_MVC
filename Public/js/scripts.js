@@ -29,12 +29,10 @@ function shuffle(array) {
 // ------------------------------------------------------GENERATE---------------------------------------
 
 function printQuestion(question, database){
-    let questionElements = [];
     let title = document.createElement("h2");
     let content = document.createTextNode(question.qu);
     title.appendChild(content);
     WRAPPERTIT.appendChild(title);
-    questionElements.push(title)
 
     let arrayAns = [];
     for (let i = 0; i < question.an.length; i++) {
@@ -52,7 +50,6 @@ function printQuestion(question, database){
         input.setAttribute("name", "answer");
         input.setAttribute("type", "radio");
         WRAPPERANS.appendChild(input);
-        questionElements.push(input);
         
         let label = document.createElement("label");
         let labelCont = document.createTextNode(arrayAns[i].text);
@@ -61,18 +58,16 @@ function printQuestion(question, database){
 
         label.addEventListener("click",() => {
             if (!title.classList.contains("clicked")) {
-                evaluateAnswer(question.ok, questionElements, label, arrayAns[i].pos, database, title)
+                evaluateAnswer(question.ok, label, arrayAns[i].pos, database, title)
             }
             });
-
         WRAPPERANS.appendChild(label);
-        questionElements.push(label);
     }
 }
 
 // ----------------------------------------------------------EVALUATE-------------------------------------
 
-function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos, database, title) {
+function evaluateAnswer(correctPos, answerLabel, selectedPos, database, title) {
     answerLabel.classList.add("checked");
     title.classList.add("clicked");
     
@@ -83,32 +78,31 @@ function evaluateAnswer(correctPos, nodes, answerLabel, selectedPos, database, t
             position++;
             counter++;
 
-            next(nodes, database);
+            next(database);
             
         }else{
             answerLabel.classList.remove("checked");
             answerLabel.classList.add("wrong");
             position++;
 
-            next(nodes, database);
+            next(database);
         }
     }, 500);
 }
 
 // ------------------------------------------------------NEXT QUESTION-----------------------------
 
-function next(nodes, database) {
-    setTimeout(() => remover(nodes), 1000);
+function next(database) {
+    setTimeout(() => removeWrapper(), 1000);
     if (position < database.length) {
         setTimeout(() => printQuestion(database[position], database), 1000);
     }else{
         setTimeout(() => count(counter, database.length), 1000);}
 }
 
-function remover(nodes){
-    for (let i = 0; i < nodes.length; i++) {
-        nodes[i].remove();        
-    }
+function removeWrapper() {
+    WRAPPERTIT.querySelectorAll('*').forEach(el => el.remove())
+    WRAPPERANS.querySelectorAll('*').forEach(el => el.remove())
 }
 
 // ------------------------------------------------------SCORE-------------------------------------

@@ -165,7 +165,7 @@ div.dataBox p {
     line-height: 1.5;
 }
 
-/* -----------------ADMIN */
+/* --------------------------------ADMIN HEADER */
 
 .adminWrapper {
     justify-content: start;
@@ -210,6 +210,8 @@ div.dataBox p {
     transform: scale(1.05);
 }
 
+/* ---------------------------------ADMIN MAIN */
+
 .wrapperResult {
     width: 100%;
     max-width: 968px;
@@ -217,10 +219,27 @@ div.dataBox p {
     flex-direction: column;
 }
 
+.wrapperResult>div{
+    margin: 2%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapperResult .questBox {
+    flex-direction: column;
+}
+
+.wrapperResult>div>div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .wrapperResult h3 {
     margin: 2% 0 2% 0;
     width: 100%;
     font-size: 0.8rem;
+    text-align: center;
 }
 
 .wrapperResult h4 {
@@ -236,7 +255,7 @@ div.dataBox p {
 
 .wrapperResult button {
     margin: 1%;
-    width: 23%;
+    width: 25%;
     max-width: 100px;
     height: min-content;
     padding: 2%;
@@ -270,13 +289,6 @@ div.dataBox p {
     margin: 1%;
 }
 
-.wrapperResult>div{
-    margin: 2%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* ------------------------------------------------------------MEDIA QUERIES */
 
 @media screen and (min-width: 480px) {
@@ -290,7 +302,7 @@ div.dataBox p {
 
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
     .adminWrapper header {
         padding: 1%;
     }
@@ -308,8 +320,18 @@ div.dataBox p {
         padding: 2%;
     }
 
+    .wrapperResult .questBox {
+        flex-direction: row;
+    }
+
+    .wrapperResult>div>div{
+        flex-direction: column;
+        width: 20%;
+    }
+
     .wrapperResult button { 
         padding: 1%;
+        width: 100%;
     }
 }
 

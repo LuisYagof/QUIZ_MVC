@@ -24,18 +24,23 @@ function readQuest() {
 
 function printData(element) {
     let questBox = document.createElement("div")
+    questBox.setAttribute("class", "questBox")
     document.querySelector(".wrapperResult")
-        .appendChild(questBox)
-
+    .appendChild(questBox)
+        
     let quest = document.createElement("h3")
     let questCon = document.createTextNode(element.qu)
     quest.appendChild(questCon)
     questBox.appendChild(quest)
-
+    
+    let btnBox = document.createElement("div")
+    btnBox.setAttribute("class", "btnBox")
+    questBox.appendChild(btnBox)
+        
     let edit = document.createElement("button")
     let editCon = document.createTextNode("Editar")
     edit.appendChild(editCon)
-    questBox.appendChild(edit)
+    btnBox.appendChild(edit)
     edit.addEventListener("click", () => {
         printDetailEdit(element)
     })
@@ -43,7 +48,7 @@ function printData(element) {
     let erase = document.createElement("button")
     let eraseCon = document.createTextNode("Eliminar")
     erase.appendChild(eraseCon)
-    questBox.appendChild(erase)
+    btnBox.appendChild(erase)
     erase.addEventListener("click", () => {
         if (confirm("¿Seguro que quieres borrar esta pregunta?")) {
             deleteQuestion(element.qu)
