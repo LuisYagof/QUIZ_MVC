@@ -1,52 +1,39 @@
+// -----------------------------------------PAQUETES
+
 const express = require('express');
 const ENV = require('dotenv').config();
-const MongoClient = require('mongodb').MongoClient
+
+// --------------------------------------------MONGO
+
+const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-const MONGOdb = process.env.MONGO
-const optionsMongo = { useNewUrlParser: true, useUnifiedTopology: true }
-const cors = require('cors')
-const md5 = require('md5')
-const jwt = require('jsonwebtoken');
-const cryptoRS = require('crypto-random-string')
+const MONGOpath = process.env.MONGO
+const MONGOoptions = { useNewUrlParser: true, useUnifiedTopology: true }
+
+// -------------------------------SERVIDOR Y PUERTOS
 
 const server =  express()
 const listenPort = process.env.PORT || 8080;
 
-const staticFilesPath = express.static(__dirname + '/Public');
-server.use(staticFilesPath);
+// -----------------------------PARSEADOR DE EXPRESS
 
 server.use(express.urlencoded({extended:false}));
 server.use(express.json());
 
+// // ----------------------------------------MIDDLE
+
+const cors = require('cors')
+const md5 = require('md5')
+const jwt = require('jsonwebtoken');
+const cryptoRS = require('crypto-random-string')
 server.use(cors())
+
 
 // -------------------------------------LEVANTAR SERVIDOR
 
 server.listen(listenPort,
     () => console.log(`Server started listening on ${listenPort}`))
     
-// ---------------------------------SERVICIO DE ESTÁTICOS
-
-let fileOptions = {
-    root: __dirname + '/Public'
-};
-
-server.get('/login', (req,res,next) => {
-    res.sendFile('login.html', fileOptions);
-});
-
-server.get('/', (req,res) => {
-    res.sendFile('index.html', fileOptions);
-});
-
-server.get('/admin', (req,res) => {
-    res.sendFile('admin.html', fileOptions);
-});
-
-server.get('/test', (req,res) => {
-    res.sendFile('main.html', fileOptions);
-});
-
 // ---------------------------------------------VALIDATION
 
 const emailIsValid = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
@@ -60,7 +47,7 @@ server.post('/login', (req, res) => {
         pass: md5(req.body.pass)
     }
     if ( emailIsValid(req.body.email) && passIsValid(req.body.pass) ) {
-        MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+        MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
             try {
                 db.db("quiz")
                     .collection("teachers")
@@ -104,7 +91,7 @@ server.get('/questions', (req, res) => {
         let tokenArray = req.headers.authorization.split(" ")
         let decoded = jwt.decode(tokenArray[1])
         if (decoded.email) {
-            MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+            MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
                 try {
                     db.db("quiz")
                     .collection("teachers")
@@ -112,7 +99,7 @@ server.get('/questions', (req, res) => {
                         try {
                             let verified = jwt.verify(tokenArray[1], result.secret)
                                 if (verified.email) {
-                                    MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+                                    MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
                                             db.db("quiz")
                                             .collection("questions")
                                             .find({}).toArray( (err, result) => {
@@ -160,7 +147,7 @@ server.put('/logout', (req, res) => {
         let tokenArray = req.headers.authorization.split(" ")
         let decoded = jwt.decode(tokenArray[1])
         if (decoded.email) {
-            MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+            MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
                 try {
                     db.db("quiz")
                         .collection("teachers")
@@ -208,7 +195,7 @@ server.post('/add', (req, res) => {
         an: req.body.an,
         ok: req.body.ok
     }
-    MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+    MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
         try {
             db.db("quiz")
                 .collection("questions")
@@ -241,7 +228,7 @@ server.post('/add', (req, res) => {
 
 server.delete('/delete', (req, res) => {
     try {
-        MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+        MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
                 db.db("quiz")
                     .collection("questions")
                     .deleteOne({_id: ObjectID(req.body._id)}, (err, result) => {
@@ -266,7 +253,7 @@ server.delete('/delete', (req, res) => {
 // -------------------------------------------------EDIT
 
 server.put('/edit', (req, res) => {
-    MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+    MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
         try {
             db.db("quiz")
                 .collection("questions")
@@ -297,9 +284,9 @@ server.put('/edit', (req, res) => {
 
 // -------------------------------------------------GET QUESTIONS
 
-server.get('/getQuestions', (req, res) => {
+server.get('/getTest', (req, res) => {
     try {
-        MongoClient.connect(MONGOdb, optionsMongo, (err, db) => {
+        MongoClient.connect(MONGOpath, MONGOoptions, (err, db) => {
                 db.db("quiz")
                 .collection("questions")
                 .find({}).toArray( (err, result) => {

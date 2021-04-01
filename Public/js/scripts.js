@@ -4,7 +4,7 @@ let counter = 0;
 let position = 0;
 
 async function getQuest() {
-    fetch("/getQuestions")
+    fetch("http://localhost:8080/getTest")
     .then(res => res.json())
     .then(data => {
         if (data.status == 200){

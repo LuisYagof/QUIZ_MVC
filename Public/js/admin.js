@@ -1,7 +1,7 @@
 // ----------------------------------------------------------WELCOME
 
 function readQuest() {
-        fetch("/questions", {
+        fetch("http://localhost:8080/questions", {
             headers: {
                 'authorization': `Bearer: ${sessionStorage.getItem('token')}`
             }
@@ -64,7 +64,7 @@ document.querySelector("#logout")
     .addEventListener("click", () => logout() )
     
 function logout() {
-    fetch("/logout", {
+    fetch("http://localhost:8080/logout", {
         method: 'PUT',
         headers: {
             'authorization': `Bearer: ${sessionStorage.getItem('token')}`
@@ -199,7 +199,7 @@ function printDetailNewQ(){
 }
 
 function addQuestionToDB(qu, an1, an2, an3, an4, corr) {
-    fetch("/add", {
+    fetch("http://localhost:8080/add", {
         method: 'POST',
         body: JSON.stringify( {qu: qu, an: [an1, an2, an3, an4], ok: corr} ),
         headers: {
@@ -225,7 +225,7 @@ function addQuestionToDB(qu, an1, an2, an3, an4, corr) {
 //  ----------------------------------------------------------DELETE QUEST
 
 function deleteQuestion(questionId) {
-    fetch("/delete", {
+    fetch("http://localhost:8080/delete", {
         method: 'DELETE',
         body: JSON.stringify( { _id: questionId } ),
         headers: {
@@ -351,7 +351,7 @@ function printDetailEdit(element){
 }
 
 function editQuestionDB(qu, an1, an2, an3, an4, corr, id) {
-    fetch("/edit", {
+    fetch("http://localhost:8080/edit", {
         method: 'PUT',
         body: JSON.stringify( {_id: id, qu: qu, an: [an1, an2, an3, an4], ok: corr} ),
         headers: {

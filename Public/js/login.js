@@ -7,7 +7,7 @@ document.querySelector("#log")
     .addEventListener("click", () => login() )
     
 function login() {
-    fetch("/login", {
+    fetch("http://localhost:8080/login", {
         method: 'POST',
         body: JSON.stringify( {email: INPUTmail.value, pass: INPUTpass.value} ),
         headers: {
